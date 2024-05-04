@@ -45,6 +45,7 @@ const Total = () => {
     <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
   )
 }
+
 const App = () => {
   const course = 'Half Stack application development'
   return (
