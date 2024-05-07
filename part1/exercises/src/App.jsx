@@ -8,7 +8,7 @@ total --> total number of exercises*/
 refactor the content component to renders three Part components*/
 
 const Part = (exercise) => {
-  console.log(exercise)
+  //console.log(exercise)
   return(
     <>
       <p>
@@ -19,7 +19,7 @@ const Part = (exercise) => {
 } 
 
 const Header = (course) => {
-  console.log(course)
+  //console.log(course)
   return(
     <div>
       <h1>
@@ -29,19 +29,18 @@ const Header = (course) => {
   )
 }
 
-const Content = () => {
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-
+const Content = (part) => {
+  // const part1 = 'Fundamentals of React'
+  // const exercises1 = 10
+  // const part2 = 'Using props to pass data'
+  // const exercises2 = 7
+  // const part3 = 'State of a component'
+  // const exercises3 = 14
+  let a = part
+  //console.log(a['parts']['name'])
   return (
     <div>
-      <Part part={part1} exercise={exercises1}/>
-      <Part part={part2} exercise={exercises2}/>
-      <Part part={part3} exercise={exercises3}/>
+      <Part part={a['parts']['name']} exercise={a['parts']['exercises']}/>
     </div>
   )
 }
@@ -55,14 +54,32 @@ const Total = () => {
   )
 }
 
+/* part 1.3 Modify the variable definitions of the App component as 
+follows and also refactor the application so that it still works: */
+
 const App = () => {
   const course = 'Half Stack application development'
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
+
   return (
-    <main>
-      <Header course={course}/>
-      <Content/>
-      <Total/>
-    </main>
+    <div>
+      <Header course={course} />
+      <Content parts={part1} />
+      <Content parts={part2} />
+      <Content parts={part3} />
+      <Total />
+    </div>
   )
 }
 
