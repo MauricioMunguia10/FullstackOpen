@@ -71,6 +71,9 @@ follows and also refactor the application so that it still works: */
 /* part 1.4 Place the objects into an array. Modify the variable definitions of App 
 into the following form and modify the other parts of the application accordingly*/
 
+/*Let's take the changes one step further. Change the course and its parts 
+into a single JavaScript object. Fix everything that breaks. */
+
 const App = () => {
   const course = {
     name: 'Half Stack application development',
