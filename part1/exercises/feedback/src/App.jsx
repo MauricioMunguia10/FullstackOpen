@@ -1,5 +1,11 @@
 import { useState } from 'react'
 
+/*1.7: unicafe step 2
+Expand your application so that it shows more statistics about 
+the gathered feedback: the total number of collected feedback, 
+the average score (good: 1, neutral: 0, bad: -1) and the percentage 
+of positive feedback.
+*/
 const Title = (props) => {
   return (
     <h1>{props.text}</h1>
@@ -16,7 +22,7 @@ const Button = ({ handleClick, text }) => {
 }
 
 const Results = (props) => {
-  console.log(props.data)
+  //console.log(props.data)
   return (
     <>
       <p>
@@ -31,6 +37,32 @@ const Results = (props) => {
       <p>
         Total: {props.data[0]['total']}
       </p> 
+    </>
+  )
+}
+
+const Average = (props) => {
+  let avg = 0
+  if(props.data[0]['total']!=0)
+    avg = (props.data[0]['good'] - props.data[0]['bad']) / props.data[0]['total']
+  return (
+    <>
+      <p>
+        Average: {avg.toFixed(2)}
+      </p>
+    </>
+  )
+}
+
+const Positive = (props) => {
+  let avg = 0
+  if(props.data[0]['total']!=0)
+    avg = (props.data[0]['good'] * 100) / props.data[0]['total']
+  return (
+    <>
+      <p>
+        Positive: {avg.toFixed(2)} %
+      </p>
     </>
   )
 }
@@ -74,7 +106,9 @@ const App = () => {
       <Button handleClick={handleBad} text='bad' />
       <Button handleClick={reset} text='reset' />
       <Title text="Statistics"/>
-      <Results data={data}/>
+      <Results data={data} />
+      <Average data={data} />
+      <Positive data={data} />
     </>
   )
 }
