@@ -6,6 +6,12 @@ the gathered feedback: the total number of collected feedback,
 the average score (good: 1, neutral: 0, bad: -1) and the percentage 
 of positive feedback.
 */
+
+/*1.8: unicafe step 3
+Refactor your application so that displaying the statistics is extracted 
+into its own Statistics component. The state of the application should 
+remain in the App root component.
+*/
 const Title = (props) => {
   return (
     <h1>{props.text}</h1>
@@ -21,7 +27,7 @@ const Button = ({ handleClick, text }) => {
   
 }
 
-const Results = (props) => {
+/*const Results = (props) => {
   //console.log(props.data)
   return (
     <>
@@ -65,6 +71,40 @@ const Positive = (props) => {
       </p>
     </>
   )
+}*/
+
+const Statistics = (props) => {
+  //console.log(props.data)
+  let arr = props.data 
+  let avg = 0
+  let positive = 0
+  if(arr[0]['total']!=0){
+    avg = (arr[0]['good'] - arr[0]['bad']) / arr[0]['total']
+    positive = (arr[0]['good'] * 100) / arr[0]['total']
+  }
+  return (
+    <>
+      <p>
+        Good: {arr[0]['good']}
+      </p>
+      <p>
+        Neutral: {arr[0]['neutral']}
+      </p>
+      <p>
+        Bad: {arr[0]['bad']}
+      </p>
+      <p>
+        Total: {arr[0]['total']}
+      </p>
+      <p>
+        Average: {avg.toFixed(2)}
+      </p>
+      <p>
+        Positive: {positive.toFixed(2)} %
+      </p>
+
+    </>
+  )
 }
 
 const App = () => {
@@ -106,9 +146,7 @@ const App = () => {
       <Button handleClick={handleBad} text='bad' />
       <Button handleClick={reset} text='reset' />
       <Title text="Statistics"/>
-      <Results data={data} />
-      <Average data={data} />
-      <Positive data={data} />
+      <Statistics data={data} />
     </>
   )
 }
