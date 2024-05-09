@@ -12,6 +12,10 @@ Refactor your application so that displaying the statistics is extracted
 into its own Statistics component. The state of the application should 
 remain in the App root component.
 */
+
+/*1.9 unicafe step 4 
+Change your application 
+to display statistics only once feedback has been gathered.*/
 const Title = (props) => {
   return (
     <h1>{props.text}</h1>
@@ -82,29 +86,31 @@ const Statistics = (props) => {
     avg = (arr[0]['good'] - arr[0]['bad']) / arr[0]['total']
     positive = (arr[0]['good'] * 100) / arr[0]['total']
   }
-  return (
-    <>
-      <p>
-        Good: {arr[0]['good']}
-      </p>
-      <p>
-        Neutral: {arr[0]['neutral']}
-      </p>
-      <p>
-        Bad: {arr[0]['bad']}
-      </p>
-      <p>
-        Total: {arr[0]['total']}
-      </p>
-      <p>
-        Average: {avg.toFixed(2)}
-      </p>
-      <p>
-        Positive: {positive.toFixed(2)} %
-      </p>
+  if(arr[0]['total'] != 0){
+    return (
+      <>
+        <p>
+          Good: {arr[0]['good']}
+        </p>
+        <p>
+          Neutral: {arr[0]['neutral']}
+        </p>
+        <p>
+          Bad: {arr[0]['bad']}
+        </p>
+        <p>
+          Total: {arr[0]['total']}
+        </p>
+        <p>
+          Average: {avg.toFixed(2)}
+        </p>
+        <p>
+          Positive: {positive.toFixed(2)} %
+        </p>
 
-    </>
-  )
+      </>
+    )
+  }
 }
 
 const App = () => {
