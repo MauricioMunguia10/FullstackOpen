@@ -16,6 +16,16 @@ remain in the App root component.
 /*1.9 unicafe step 4 
 Change your application 
 to display statistics only once feedback has been gathered.*/
+
+/*1.10: unicafe step 5
+
+Let's continue refactoring the application. 
+Extract the following two components:
+
+  Button handles the functionality of each feedback submission button.
+  StatisticLine for displaying a single statistic, e.g. the average score.
+
+*/
 const Title = (props) => {
   return (
     <h1>{props.text}</h1>
@@ -85,32 +95,31 @@ const Statistics = (props) => {
   if(arr[0]['total']!=0){
     avg = (arr[0]['good'] - arr[0]['bad']) / arr[0]['total']
     positive = (arr[0]['good'] * 100) / arr[0]['total']
+    positive += " %"
   }
   if(arr[0]['total'] != 0){
     return (
       <>
-        <p>
-          Good: {arr[0]['good']}
-        </p>
-        <p>
-          Neutral: {arr[0]['neutral']}
-        </p>
-        <p>
-          Bad: {arr[0]['bad']}
-        </p>
-        <p>
-          Total: {arr[0]['total']}
-        </p>
-        <p>
-          Average: {avg.toFixed(2)}
-        </p>
-        <p>
-          Positive: {positive.toFixed(2)} %
-        </p>
-
+        <StatisticsLine text = "Good" value = {arr[0]['good']} />
+        <StatisticsLine text = "Neutral" value = {arr[0]['neutral']} />
+        <StatisticsLine text = "Bad" value = {arr[0]['bad']} />
+        <StatisticsLine text = "Total" value = {arr[0]['total']} />
+        <StatisticsLine text = "Average" value = {avg} />
+        <StatisticsLine text = "Positive" value = {positive} />
       </>
     )
   }
+}
+
+const StatisticsLine = (props) => {
+  //console.log(props.text)
+  return(
+    <>
+      <p>
+        {props.text}: {props.value} 
+      </p>
+    </>
+  )
 }
 
 const App = () => {
