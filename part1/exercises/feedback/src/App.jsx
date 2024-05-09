@@ -94,8 +94,9 @@ const Statistics = (props) => {
   let positive = 0
   if(arr[0]['total']!=0){
     avg = (arr[0]['good'] - arr[0]['bad']) / arr[0]['total']
-    positive = (arr[0]['good'] * 100) / arr[0]['total']
+    positive = ((arr[0]['good'] * 100) / arr[0]['total']).toFixed(2)
     positive += " %"
+
   }
   if(arr[0]['total'] != 0){
     return (
@@ -104,7 +105,7 @@ const Statistics = (props) => {
         <StatisticsLine text = "Neutral" value = {arr[0]['neutral']} />
         <StatisticsLine text = "Bad" value = {arr[0]['bad']} />
         <StatisticsLine text = "Total" value = {arr[0]['total']} />
-        <StatisticsLine text = "Average" value = {avg} />
+        <StatisticsLine text = "Average" value = {avg.toFixed(2)} />
         <StatisticsLine text = "Positive" value = {positive} />
       </>
     )
