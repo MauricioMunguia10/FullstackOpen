@@ -87,6 +87,11 @@ const Positive = (props) => {
   )
 }*/
 
+/*1.11*: unicafe step 6
+Display the statistics in an HTML table,
+so that your application looks roughly like this:
+*/
+
 const Statistics = (props) => {
   //console.log(props.data)
   let arr = props.data 
@@ -100,14 +105,14 @@ const Statistics = (props) => {
   }
   if(arr[0]['total'] != 0){
     return (
-      <>
+      <table>
         <StatisticsLine text = "Good" value = {arr[0]['good']} />
         <StatisticsLine text = "Neutral" value = {arr[0]['neutral']} />
         <StatisticsLine text = "Bad" value = {arr[0]['bad']} />
         <StatisticsLine text = "Total" value = {arr[0]['total']} />
         <StatisticsLine text = "Average" value = {avg.toFixed(2)} />
         <StatisticsLine text = "Positive" value = {positive} />
-      </>
+      </table>
     )
   }
 }
@@ -115,11 +120,16 @@ const Statistics = (props) => {
 const StatisticsLine = (props) => {
   //console.log(props.text)
   return(
-    <>
-      <p>
-        {props.text}: {props.value} 
-      </p>
-    </>
+    <tbody>
+      <tr>
+        <td>
+          {props.text}
+        </td>
+        <td>
+          {props.value}
+        </td>
+      </tr>
+    </tbody>
   )
 }
 
