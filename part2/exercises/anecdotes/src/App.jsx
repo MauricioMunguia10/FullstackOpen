@@ -1,4 +1,40 @@
 /* 2.1: Course information step6*/
+const Header = ({course}) => {
+  console.log(course)
+  return(
+    <>
+      <h1>{course['name']}</h1>
+    </>
+  )
+}
+
+const Content = ({course}) => {
+  return(
+    <>
+      <Part course={course} />
+    </>
+  )
+}
+
+const Part = ({course}) => {
+  
+  return(
+    <>
+      {course.parts.map(part => 
+          <p key={part.id}>{part.name}  {part.exercises}</p>
+      )}
+    </>
+  )
+}
+
+const Course = ({course}) => {
+  return(
+    <>
+      <Header course={course} />
+      <Content course={course} />
+    </>
+  )
+}
 
 const App = () => {
   const course = {
