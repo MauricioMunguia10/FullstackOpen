@@ -5,12 +5,16 @@ The world of software engineering is filled with anecdotes that distill
 timeless truths from our field into short one-liners. 
 
 1.13*: anecdotes step 2
-Expand your application so that you can vote for the displayed anecdote.*/
+Expand your application so that you can vote for the displayed anecdote.
 
-const Title = () => {
+1.14*: anecdotes step 3
+Now implement the final version of the application that displays the 
+anecdote with the largest number of votes */
+
+const Title = ({text}) => {
   return (
     <h1>
-      Anecdotes 
+      {text} 
     </h1>
   )
 }
@@ -49,9 +53,10 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
    
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(null)
   const [number, setNumber] = useState(0)
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+  const [popular, setPopular] = useState(null)
 
   const setRandom = () => {
     let num = Math.floor(Math.random() * (anecdotes.length))
@@ -67,14 +72,23 @@ const App = () => {
     newVotes[number] += 1
     setVotes(newVotes)
     console.log(newVotes)
+    let max = 0
+    for(let i=0;i<newVotes.length; i++){
+      if(newVotes[i]>=max){
+        max = newVotes[i]
+        setPopular(i)
+      }
+    }
   }
 
   return (
     <div>
-      <Title />
+      <Title text='Anecdote of the day' />
       <Anecdote text={selected} />
       <Button handleClick={setRandom} text='Change anecdote' />
       <Button handleClick={voteUp} text='Vote Up' />
+      <Title text='Anecdote with most votes' />
+      <Anecdote text={anecdotes[popular]} />
     </div>
   )
 }
