@@ -1,4 +1,9 @@
-/* 2.1: Course information step6*/
+/* 2.1: Course information step6
+
+2.2: Course information step7
+Show also the sum of the exercises of the course. */
+
+
 const Header = ({course}) => {
   console.log(course)
   return(
@@ -23,6 +28,20 @@ const Part = ({course}) => {
       {course.parts.map(part => 
           <p key={part.id}>{part.name}  {part.exercises}</p>
       )}
+      <Total course={course} />
+    </>
+  )
+}
+
+const Total = ({course}) => {
+  let sum = 0
+  course.parts.map(part =>
+    sum += part.exercises
+  )
+
+  return(
+    <>
+      <p>Total of {sum} exercises</p>
     </>
   )
 }
