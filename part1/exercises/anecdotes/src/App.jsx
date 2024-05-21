@@ -50,7 +50,7 @@ const App = () => {
   const [selected, setSelected] = useState(0)
 
   const setRandom = () => {
-    let num = Math.floor(Math.random() * (anecdotes.length+1))
+    let num = Math.floor(Math.random() * (anecdotes.length))
     console.log(num)
     let anecdote = anecdotes[num]
 
