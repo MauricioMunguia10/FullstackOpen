@@ -2,7 +2,10 @@ import { useState } from 'react'
 
 /*1.12*: anecdotes step 1
 The world of software engineering is filled with anecdotes that distill
-timeless truths from our field into short one-liners. */
+timeless truths from our field into short one-liners. 
+
+1.13*: anecdotes step 2
+Expand your application so that you can vote for the displayed anecdote.*/
 
 const Title = () => {
   return (
@@ -35,7 +38,6 @@ const Anecdote = ({text}) => {
 }
 
 const App = () => {
-
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -48,14 +50,23 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [number, setNumber] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
   const setRandom = () => {
     let num = Math.floor(Math.random() * (anecdotes.length))
     console.log(num)
     let anecdote = anecdotes[num]
-
+    setNumber(num)
     setSelected (anecdote)
     
+  }
+
+  const voteUp = () => {
+    const newVotes = [...votes]
+    newVotes[number] += 1
+    setVotes(newVotes)
+    console.log(newVotes)
   }
 
   return (
@@ -63,6 +74,7 @@ const App = () => {
       <Title />
       <Anecdote text={selected} />
       <Button handleClick={setRandom} text='Change anecdote' />
+      <Button handleClick={voteUp} text='Vote Up' />
     </div>
   )
 }
