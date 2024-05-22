@@ -1,7 +1,11 @@
 /* 2.1: Course information step6
 
 2.2: Course information step7
-Show also the sum of the exercises of the course. */
+Show also the sum of the exercises of the course. 
+
+2.3*: Course information step8
+If you haven't done so already, calculate the sum of exercises with the array method reduce.
+*/
 
 
 const Header = ({course}) => {
@@ -34,14 +38,21 @@ const Part = ({course}) => {
 }
 
 const Total = ({course}) => {
-  let sum = 0
-  course.parts.map(part =>
-    sum += part.exercises
-  )
+  // let sum = 0
+  // course.parts.map(part =>
+  //   sum += part.exercises
+  // )
+  let exercises = course.parts
+  console.log(exercises)
+ 
+  const total = exercises.reduce((sum, exercise) => {
+    return sum + exercise['exercises'];
+  }, 0);
+  
 
   return(
     <>
-      <p>Total of {sum} exercises</p>
+      <p>Total of {total} exercises</p>
     </>
   )
 }
