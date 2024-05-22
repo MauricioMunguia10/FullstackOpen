@@ -8,66 +8,12 @@ If you haven't done so already, calculate the sum of exercises with the array me
 
 2.4: Course information step9
 Let's extend our application to allow for an arbitrary number of courses
+
+2.5: Separate module step10
+Declare the Course component as a separate module, which is imported by the App component.
+You can include all subcomponents of the course in the same module.
 */
-
-
-const Header = ({course}) => {
-  console.log(course)
-  return(
-    <>
-      <h1>{course['name']}</h1>
-    </>
-  )
-}
-
-const Content = ({course}) => {
-  return(
-    <>
-      <Part course={course} />
-    </>
-  )
-}
-
-const Part = ({course}) => {
-  
-  return(
-    <>
-      {course.parts.map(part => 
-          <p key={part.id}>{part.name}  {part.exercises}</p>
-      )}
-      <Total course={course} />
-    </>
-  )
-}
-
-const Total = ({course}) => {
-  // let sum = 0
-  // course.parts.map(part =>
-  //   sum += part.exercises
-  // )
-  let exercises = course.parts
-  console.log(exercises)
- 
-  const total = exercises.reduce((sum, exercise) => {
-    return sum + exercise['exercises'];
-  }, 0);
-  
-
-  return(
-    <>
-      <p>Total of {total} exercises</p>
-    </>
-  )
-}
-
-const Course = ({course}) => {
-  return(
-    <>
-      <Header course={course} />
-      <Content course={course} />
-    </>
-  )
-}
+import Course from './Course'
 
 const App = () => {
   const courses = [
@@ -118,7 +64,7 @@ const App = () => {
   return(
     <>
       {courses.map(course => 
-          <Course course={course} />
+          <Course course={course} key={course.id}/>
       )}
     </>
   )
