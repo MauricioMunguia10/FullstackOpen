@@ -12,9 +12,17 @@ const Button = ({ handleClick, text }) => {
 const Title = ({text, type}) => {
   return(
     <>
-      {console.log(type)}
+      {
+        type === 'h1' ? (
+          <h1>{text}</h1>
+        ) : type === 'h2' ? (
+          <h2>{text}</h2>
+        ) : (
+          <p>{text}</p>
+        )
+      }
     </>
   )
 }
 
-export default Button
+export {Button, Title}
