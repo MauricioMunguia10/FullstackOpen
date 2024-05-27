@@ -2,20 +2,26 @@ import { useState } from 'react'
 import { Button } from './Basics'
 
 const Form = ({ onDataChange }) => {
-  const [inputValue, setInputValue] = useState('')
+  const [inputName, setInputName] = useState('');
+  const [inputNumber, setInputNumber] = useState('');
 
-  const handleChange = (event) => {
-    setInputValue(event.target.value)
-  }
+  const handleNameChange = (event) => {
+    setInputName(event.target.value);
+  };
+
+  const handleNumberChange = (event) => {
+    setInputNumber(event.target.value);
+  };
 
   const save = () => {
-    onDataChange(inputValue)
-  }
+    onDataChange({ name: inputName, number: inputNumber });
+  };
 
   return (
     <>
       <div>
-        Name: <input value={inputValue} onChange={handleChange} />
+        Name: <input value={inputName} onChange={handleNameChange} /><br />
+        Phone number: <input value={inputNumber} onChange={handleNumberChange} /><br />
         <Button handleClick={save} text='Save' />
       </div>
     </>
