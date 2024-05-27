@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import Form from './components/Form'
 import { Title } from './components/Basics'
 import Result from './components/Results'
+import axios from 'axios'
 
 /*2.6: The Phonebook Step 1
 Let's create a simple phonebook. In this part, we will only be adding names to the phonebook.
@@ -20,15 +21,14 @@ Implement a search field that can be used to filter the list of people by name
 2.10: The Phonebook Step 5
 If you have implemented your application in a single component, 
 refactor it by extracting suitable parts into new components. 
-Maintain the application's state and all event handlers in the App root component.*/
+Maintain the application's state and all event handlers in the App root component.
+
+2.11: The Phonebook Step 6
+We continue with developing the phonebook. Store the initial state of the application in the file db.json,
+which should be placed in the root of the project.*/
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phoneNumber: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', phoneNumber: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', phoneNumber: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', phoneNumber: '39-23-6423122', id: 4 }
-  ])
+  const [persons, setPersons] = useState([])
 
   const handleDataChange = (newPerson) => {
     const result = persons.find((person) => person.name === newPerson.name)
@@ -40,7 +40,14 @@ const App = () => {
       setPersons(updatedPersons);
     }
     
-  };
+  }
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
 
   return (
     <>
