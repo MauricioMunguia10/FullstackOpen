@@ -14,7 +14,10 @@ const Form = ({ onDataChange }) => {
   };
 
   const save = () => {
-    onDataChange({ name: inputName, number: inputNumber });
+    if(inputName != "" && inputNumber != "")
+      onDataChange({ name: inputName, number: inputNumber });
+    else
+      alert('insert all info')
   };
 
   return (
