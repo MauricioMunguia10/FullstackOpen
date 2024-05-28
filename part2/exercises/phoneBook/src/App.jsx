@@ -27,6 +27,14 @@ Maintain the application's state and all event handlers in the App root componen
 We continue with developing the phonebook. Store the initial state of the application in the file db.json,
 which should be placed in the root of the project.*/
 
+/*2.12: The Phonebook step 7
+Let's return to our phonebook application.
+Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
+
+2.13: The Phonebook step 8
+Extract the code that handles the communication with the backend
+into its own module by following the example shown earlier in this part of the course material.*/
+
 const App = () => {
   const [persons, setPersons] = useState([])
 
@@ -35,6 +43,16 @@ const App = () => {
     if(result)
       alert(`${newPerson.name} is already added to phonebook`)
     else{
+      const personObject = {
+        name: newPerson.name,
+        phoneNumber: newPerson.number
+      }
+    
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          })
       const person = { name: newPerson.name, phoneNumber: newPerson.number}
       const updatedPersons = [...persons, person];
       setPersons(updatedPersons);
