@@ -21,7 +21,7 @@ const Filter = ({persons, onDataChange}) => {
       axios
         .delete(`http://localhost:3001/persons/${personToDelete.id}`)
         .then(response => {
-          console.log(response.data.id)
+          //console.log(response.data.id)
           const filteredPersons = persons.filter(person => person.id !== personToDelete.id)
           onDataChange(filteredPersons)
     })}

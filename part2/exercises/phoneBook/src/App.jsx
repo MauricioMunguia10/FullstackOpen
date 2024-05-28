@@ -36,7 +36,11 @@ Extract the code that handles the communication with the backend
 into its own module by following the example shown earlier in this part of the course material.
 
 2.14: The Phonebook step 9
-Make it possible for users to delete entries from the phonebook.*/
+Make it possible for users to delete entries from the phonebook.
+
+2.15*: The Phonebook step 10
+Change the functionality so that if a number is added to an already existing user, the new number will replace the old number.
+It's recommended to use the HTTP PUT method for updating the phone number.*/
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -44,7 +48,23 @@ const App = () => {
   const handleDataChange = (newPerson) => {
     const result = persons.find((person) => person.name === newPerson.name)
     if (result) {
-      alert(`${newPerson.name} is already added to phonebook`)
+      if(window.confirm(`Do you want to change the number of ${newPerson.name}?`)){
+        const personObject = {
+          name: newPerson.name,
+          phoneNumber: newPerson.number,
+          id: result.id
+        }
+        axios.put(`http://localhost:3001/persons/${result.id}`, personObject)
+          .then(response => {
+          console.log('PUT request successful:', response.data);
+          setPersons(persons.map(person => (person.id === result.id ? response.data : person)));
+        })
+        .catch(error => {
+        console.error('Error updating person:', error);
+        });
+      }
+
+       
     } else {
       const personObject = {
         name: newPerson.name,
