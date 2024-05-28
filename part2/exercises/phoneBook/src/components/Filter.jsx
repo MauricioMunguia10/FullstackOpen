@@ -17,13 +17,14 @@ const Filter = ({persons, onDataChange}) => {
   }
 
   const deletePerson = (personToDelete) => {
-    axios
-      .delete(`http://localhost:3001/persons/${personToDelete.id}`)
-      .then(response => {
-        console.log(response.data.id)
-        const filteredPersons = persons.filter(person => person.id !== personToDelete.id)
-        onDataChange(filteredPersons)
-      })
+    if(window.confirm(`Do you really want to delete ${personToDelete.name}?`)){
+      axios
+        .delete(`http://localhost:3001/persons/${personToDelete.id}`)
+        .then(response => {
+          console.log(response.data.id)
+          const filteredPersons = persons.filter(person => person.id !== personToDelete.id)
+          onDataChange(filteredPersons)
+    })}
   }
 
   return(
