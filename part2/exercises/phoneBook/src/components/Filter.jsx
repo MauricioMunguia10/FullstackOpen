@@ -1,18 +1,29 @@
 import { useState } from 'react'
+import { Button } from './Basics'
+import axios from 'axios'
 
-const Filter = ({persons}) => {
+const Filter = ({persons, onDataChange}) => {
 
   const [inputFilter, setInputFilter] = useState('')
 
   const handleFilterChange = (event) => {
     setInputFilter(event.target.value)
-
   }
 
   const filterPerson = (filter) => {
     return persons.filter((person) =>
       person.name.toLowerCase().startsWith(filter.toLowerCase())
     )
+  }
+
+  const deletePerson = (personToDelete) => {
+    axios
+      .delete(`http://localhost:3001/persons/${personToDelete.id}`)
+      .then(response => {
+        console.log(response.data.id)
+        const filteredPersons = persons.filter(person => person.id !== personToDelete.id)
+        onDataChange(filteredPersons)
+      })
   }
 
   return(
@@ -24,7 +35,7 @@ const Filter = ({persons}) => {
         onChange={handleFilterChange} 
       />
       {filterPerson(inputFilter).map((person,i) => {
-        return <p key={i}>{person.name} {person.phoneNumber}</p>
+        return <p key={i}>{person.name} {person.phoneNumber} <Button handleClick={() => deletePerson(person)} text='Delete'/></p>
       })}
     </>
   )

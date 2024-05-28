@@ -1,10 +1,14 @@
 import Filter from "./Filter"
 
-const Result = ({persons}) => {
+const Result = ({persons, onDataChange}) => {
+
+  const upInfo = (up) => {
+    onDataChange(up)
+  }
 
   return(
     <>
-      <Filter persons={persons} />
+      <Filter persons={persons} onDataChange={upInfo} />
     </>
   )
 }

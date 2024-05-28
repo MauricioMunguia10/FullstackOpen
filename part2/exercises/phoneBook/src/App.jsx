@@ -33,38 +33,48 @@ Currently, the numbers that are added to the phonebook are not saved to a backen
 
 2.13: The Phonebook step 8
 Extract the code that handles the communication with the backend
-into its own module by following the example shown earlier in this part of the course material.*/
+into its own module by following the example shown earlier in this part of the course material.
+
+2.14: The Phonebook step 9
+Make it possible for users to delete entries from the phonebook.*/
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
   const handleDataChange = (newPerson) => {
     const result = persons.find((person) => person.name === newPerson.name)
-    if(result)
+    if (result) {
       alert(`${newPerson.name} is already added to phonebook`)
-    else{
+    } else {
       const personObject = {
         name: newPerson.name,
         phoneNumber: newPerson.number
       }
-    
+
       axios
         .post('http://localhost:3001/persons', personObject)
         .then(response => {
-          setPersons(persons.concat(response.data))
-          })
-      const person = { name: newPerson.name, phoneNumber: newPerson.number}
-      const updatedPersons = [...persons, person];
-      setPersons(updatedPersons);
+          setPersons([...persons, response.data])
+        })
+        .catch(error => {
+          console.error('Error adding new person:', error)
+        })
     }
-    
   }
-  useEffect(() => {
+
+  const reload = () => {
     axios
       .get('http://localhost:3001/persons')
       .then(response => {
-        setPersons(response.data)
+        setPersons(response.data);
       })
+      .catch(error => {
+        console.error('Error reloading data:', error);
+      })
+  }
+
+  useEffect(() => {
+    reload()
   }, [])
 
   return (
@@ -73,7 +83,7 @@ const App = () => {
       <Title text='Add a new one' type='h2' />
       <Form onDataChange={handleDataChange} />
       <Title text='Numbers' type='h2' />
-      <Result persons={persons} />
+      <Result persons={persons} onDataChange={reload} />
     </>
   )
 }

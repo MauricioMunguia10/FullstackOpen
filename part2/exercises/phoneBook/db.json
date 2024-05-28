@@ -1,44 +1,9 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "phoneNumber": "040-123456",
-      "id": "1"
-    },
-    {
-      "name": "Ada Lovelace",
-      "phoneNumber": "39-44-5323523",
-      "id": "2"
-    },
-    {
-      "name": "Dan Abramov",
-      "phoneNumber": "12-43-234345",
-      "id": "3"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "phoneNumber": "39-23-6423122",
-      "id": "4"
-    },
-    {
-      "name": "Mauricio Munguia",
-      "phoneNumber": "56-38-00-21-43",
-      "id": "5"
-    },
-    {
-      "id": "c368",
-      "name": "Juan",
-      "phoneNumber": "123"
-    },
-    {
-      "id": "4f27",
-      "name": "juan",
-      "phoneNumber": "123"
-    },
-    {
-      "id": "6258",
-      "name": "juan perez",
-      "phoneNumber": "12334"
+      "id": "506c",
+      "name": "Adam West",
+      "phoneNumber": "1212"
     }
   ]
 }
